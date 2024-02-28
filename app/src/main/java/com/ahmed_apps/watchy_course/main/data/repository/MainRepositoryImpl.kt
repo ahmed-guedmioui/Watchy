@@ -17,11 +17,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 /**
  * @author Ahmed Guedmioui
  */
-class MainRepositoryImpl(
+class MainRepositoryImpl @Inject constructor(
     private val application: Application,
     private val mediaApi: MediaApi,
     mediaDatabase: MediaDatabase

@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.main.data.di
+package com.ahmed_apps.watchy_course.main.di
 
 import android.app.Application
 import androidx.room.Room

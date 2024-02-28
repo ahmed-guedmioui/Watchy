@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.main.data.di
+package com.ahmed_apps.watchy_course.main.di
 
 import com.ahmed_apps.watchy_course.main.data.repository.MainRepositoryImpl
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository

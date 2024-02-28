@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface MediaApi {
 
     @GET("trending/{type}/{time}")
-    fun getTrending(
+   suspend fun getTrending(
         @Path("type") type: String,
         @Path("time") time: String,
         @Query("page") page: Int,
@@ -20,7 +20,7 @@ interface MediaApi {
     ): MediaListDto?
 
     @GET("{type}/{category}")
-    fun getMoviesAndTv(
+   suspend fun getMoviesAndTv(
         @Path("type") type: String,
         @Path("category") category: String,
         @Query("page") page: Int,
