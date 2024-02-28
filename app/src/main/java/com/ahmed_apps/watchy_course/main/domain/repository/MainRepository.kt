@@ -1,6 +1,5 @@
 package com.ahmed_apps.watchy_course.main.domain.repository
 
-import com.ahmed_apps.watchy_course.main.data.local.MediaEntity
 import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -10,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
  */
 interface MainRepository {
 
-    suspend fun upsertMediaList(mediaEntities: List<MediaEntity>)
+    suspend fun upsertMediaList(mediaList: List<Media>)
 
-    suspend fun upsertMediaItem(mediaEntity: MediaEntity)
+    suspend fun upsertMediaItem(media: Media)
 
     suspend fun getMediaListByCategory(
         category: String
-    ): List<MediaEntity>
+    ): List<Media>
 
     suspend fun getTrending(
         forceFetchFromRemote: Boolean,
