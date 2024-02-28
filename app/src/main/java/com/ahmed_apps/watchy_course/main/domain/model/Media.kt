@@ -1,20 +1,16 @@
-package com.ahmed_apps.watchy_course.main.data.local
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+package com.ahmed_apps.watchy_course.main.domain.model
 
 /**
  * @author Ahmed Guedmioui
  */
-@Entity
-data class MediaEntity(
-    @PrimaryKey val mediaId: Int,
+data class Media(
+    val mediaId: Int,
 
     val adult: Boolean,
     val backdropPath: String,
-    val genres: String,
-    var mediaType: String,
-    val originCountry: String,
+    val genres: List<String>,
+    val mediaType: String,
+    val originCountry: List<String>,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -26,6 +22,7 @@ data class MediaEntity(
     val voteCount: Int,
     var category: String
 )
+
 
 
 
