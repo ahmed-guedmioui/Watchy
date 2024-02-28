@@ -1,5 +1,8 @@
 package com.ahmed_apps.watchy_course.main.data.di
 
+import android.app.Application
+import androidx.room.Room
+import com.ahmed_apps.watchy_course.main.data.local.MediaDatabase
 import com.ahmed_apps.watchy_course.main.data.remote.api.MediaApi
 import dagger.Module
 import dagger.Provides
@@ -37,6 +40,17 @@ object MainModel {
             .build()
             .create()
     }
+
+    @Provides
+    @Singleton
+    fun providesMediaDatabase(application: Application): MediaDatabase {
+        return Room.databaseBuilder(
+            application,
+            MediaDatabase::class.java,
+            "media-db.db"
+        ).build()
+    }
+
 
 }
 
