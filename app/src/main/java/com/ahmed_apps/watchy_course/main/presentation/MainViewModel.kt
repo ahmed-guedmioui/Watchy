@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun loadSpecial(list: List<Media>) {
-        if (mainState.value.specialList.size >= 4) {
+        if (mainState.value.specialList.size <= 4) {
             _mainState.update {
                 it.copy(
                     specialList = it.specialList + list.take(2)
