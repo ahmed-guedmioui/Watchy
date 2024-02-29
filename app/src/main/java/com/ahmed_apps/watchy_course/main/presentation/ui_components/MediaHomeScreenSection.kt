@@ -49,17 +49,17 @@ fun MediaHomeScreenSection(
     when (route) {
         Screen.Trending.route -> {
             mediaList = mainState.trendingList.take(10)
-            title = Screen.Trending.route
+            title = stringResource(R.string.trending)
         }
 
         Screen.Tv.route -> {
             mediaList = mainState.tvList.take(10)
-            title = Screen.Tv.route
+            title = stringResource(R.string.tv_series)
         }
 
         Screen.Movies.route -> {
             mediaList = mainState.moviesList.take(10)
-            title = Screen.Movies.route
+            title = stringResource(R.string.movies)
         }
     }
 
@@ -81,49 +81,49 @@ fun MediaHomeScreenSection(
                 Text(
                     text = stringResource(R.string.see_all),
                     color = MaterialTheme.colorScheme.onBackground.copy(0.7f),
-                    fontSize = 17.sp,
+                    fontSize = 14.sp,
                     modifier = Modifier.clickable {
 //                        mainNavController.navigate()
                     }
                 )
             }
+        }
 
-            if (mediaList.isEmpty()) {
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState())
-                ) {
-                    repeat(6) {
-                        Spacer(modifier = Modifier.width(16.dp))
-
-                        Box(
-                            modifier = Modifier
-                                .height(200.dp)
-                                .width(150.dp)
-                                .clip(RoundedCornerShape(Radius))
-                                .background(MaterialTheme.colorScheme.inverseOnSurface)
-                        )
-                    }
+        if (mediaList.isEmpty()) {
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState())
+            ) {
+                repeat(6) {
                     Spacer(modifier = Modifier.width(16.dp))
 
+                    Box(
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(150.dp)
+                            .clip(RoundedCornerShape(Radius))
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
+                    )
                 }
-            } else {
-                LazyRow {
-                    items(mediaList.size) { index ->
+                Spacer(modifier = Modifier.width(16.dp))
 
-                        var paddingEnd = 0.dp
-                        if (index == mediaList.size - 1) {
-                            paddingEnd = 16.dp
-                        }
+            }
+        } else {
+            LazyRow {
+                items(mediaList.size) { index ->
 
-                        MediaItemImage(
-                            media = mediaList[index],
-                            mainNavController = mainNavController,
-                            modifier = Modifier
-                                .height(200.dp)
-                                .width(150.dp)
-                                .padding(start = 16.dp, end = paddingEnd)
-                        )
+                    var paddingEnd = 0.dp
+                    if (index == mediaList.size - 1) {
+                        paddingEnd = 16.dp
                     }
+
+                    MediaItemImage(
+                        media = mediaList[index],
+                        mainNavController = mainNavController,
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(150.dp)
+                            .padding(start = 16.dp, end = paddingEnd)
+                    )
                 }
             }
         }

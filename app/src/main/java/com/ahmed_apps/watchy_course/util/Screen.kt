@@ -5,7 +5,7 @@ package com.ahmed_apps.watchy_course.util
  */
 sealed class Screen(val route: String) {
     object Main: Screen("main")
-    object Trending: Screen("main")
-    object Tv: Screen("main")
-    object Movies: Screen("main")
+    object Trending: Screen("trending")
+    object Tv: Screen("tv")
+    object Movies: Screen("movies")
 }

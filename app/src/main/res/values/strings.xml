@@ -2,4 +2,8 @@
     <string name="app_name">Watchy-Course</string>
     <string name="couldn_t_load_data">Couldn\'t load data</string>
     <string name="see_all">See All</string>
+    <string name="categories">Categories</string>
+    <string name="trending">Trending</string>
+    <string name="tv_series">Tv Series</string>
+    <string name="movies">Movies</string>
 </resources>
