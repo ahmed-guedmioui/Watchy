@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Watchy-Course</string>
     <string name="couldn_t_load_data">Couldn\'t load data</string>
+    <string name="see_all">See All</string>
 </resources>
