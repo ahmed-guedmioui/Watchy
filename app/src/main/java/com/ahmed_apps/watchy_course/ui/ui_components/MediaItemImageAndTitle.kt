@@ -93,7 +93,7 @@ fun MediaItemImageAndTitle(
 
         Box(
             modifier = Modifier
-                .height(140.dp)
+                .height(240.dp)
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(RadiusContainer))
                 .padding(6.dp)
@@ -162,7 +162,7 @@ fun MediaItemImageAndTitle(
 
         Row(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 8.dp)
+                .padding(horizontal = 12.dp, vertical = 10.dp)
         ) {
 
             RatingBar(

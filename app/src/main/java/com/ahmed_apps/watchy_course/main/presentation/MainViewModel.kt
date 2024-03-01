@@ -38,7 +38,25 @@ class MainViewModel @Inject constructor(
     fun event(mainUiEvents: MainUiEvents) {
         when (mainUiEvents) {
             is MainUiEvents.Paginate -> {
+                when(mainUiEvents.route) {
+                    Screen.Trending.route -> {
+                        loadTrending(
+                            forceFetchFromRemote = true
+                        )
+                    }
 
+                    Screen.Tv.route -> {
+                        loadTv(
+                            forceFetchFromRemote = true
+                        )
+                    }
+
+                    Screen.Movies.route -> {
+                        loadMovies(
+                            forceFetchFromRemote = true
+                        )
+                    }
+                }
             }
 
             is MainUiEvents.Refresh -> {

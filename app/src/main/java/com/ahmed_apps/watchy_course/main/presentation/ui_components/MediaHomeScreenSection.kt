@@ -83,7 +83,7 @@ fun MediaHomeScreenSection(
                     color = MaterialTheme.colorScheme.onBackground.copy(0.7f),
                     fontSize = 14.sp,
                     modifier = Modifier.clickable {
-//                        mainNavController.navigate()
+                        mainNavController.navigate(route)
                     }
                 )
             }

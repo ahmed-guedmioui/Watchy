@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ahmed_apps.watchy_course.main.presentation.MainScreen
 import com.ahmed_apps.watchy_course.main.presentation.MainViewModel
+import com.ahmed_apps.watchy_course.main.presentation.main_media_list.MainMediaListScreen
 import com.ahmed_apps.watchy_course.ui.theme.WatchyCourseTheme
 import com.ahmed_apps.watchy_course.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -55,15 +56,30 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(route = Screen.Trending.route) {
-
+                            MainMediaListScreen(
+                                route = Screen.Trending.route,
+                                mainNavController = mainNavController,
+                                mainState = mainState,
+                                onEvent = mainViewModel::event
+                            )
                         }
 
                         composable(route = Screen.Tv.route) {
-
+                            MainMediaListScreen(
+                                route = Screen.Tv.route,
+                                mainNavController = mainNavController,
+                                mainState = mainState,
+                                onEvent = mainViewModel::event
+                            )
                         }
 
                         composable(route = Screen.Movies.route) {
-
+                            MainMediaListScreen(
+                                route = Screen.Movies.route,
+                                mainNavController = mainNavController,
+                                mainState = mainState,
+                                onEvent = mainViewModel::event
+                            )
                         }
                     }
 
