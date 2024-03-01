@@ -21,8 +21,8 @@ fun Media.toMediaEntity(): MediaEntity {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genres = try {
-            genres.joinToString(",")
+        genreIds = try {
+            genreIds.joinToString(",")
         } catch (e: Exception) {
             ""
         },
@@ -52,8 +52,8 @@ fun MediaEntity.toMedia(): Media {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genres = try {
-            genres.split(",").map { it }
+        genreIds = try {
+            genreIds.split(",").map { it }
         } catch (e: Exception) {
             emptyList()
         },
@@ -87,7 +87,7 @@ fun MediaDto.toMediaEntity(
         voteAverage = vote_average ?: 0.0,
         popularity = popularity ?: 0.0,
         voteCount = vote_count ?: 0,
-        genres = try {
+        genreIds = try {
             genre_ids?.joinToString(",") ?: ""
         } catch (e: Exception) {
             ""

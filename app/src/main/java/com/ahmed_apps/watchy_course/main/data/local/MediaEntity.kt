@@ -12,7 +12,7 @@ data class MediaEntity(
 
     val adult: Boolean,
     val backdropPath: String,
-    val genres: String,
+    val genreIds: String,
     var mediaType: String,
     val originCountry: String,
     val originalLanguage: String,
