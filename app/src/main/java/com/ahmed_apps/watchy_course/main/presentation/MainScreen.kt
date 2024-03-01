@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -31,7 +32,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,9 +46,11 @@ import com.ahmed_apps.watchy_course.main.presentation.ui_components.MediaHomeScr
 import com.ahmed_apps.watchy_course.ui.theme.BigRadius
 import com.ahmed_apps.watchy_course.ui.theme.MediumRadius
 import com.ahmed_apps.watchy_course.ui.ui_components.AutoSwipeSection
+import com.ahmed_apps.watchy_course.ui.ui_components.NonFocusedTopBar
 import com.ahmed_apps.watchy_course.util.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 /**
  * @author Ahmed Guedmioui
@@ -70,6 +77,27 @@ fun MainScreen(
     ) { paddingValues ->
         val padding = paddingValues
 
+        val toolbarHeightPx = with(LocalDensity.current) {
+            BigRadius.roundToPx().toFloat()
+        }
+
+        val toolbarOffsetHeightPx = remember {
+            mutableFloatStateOf(0f)
+        }
+
+        val nestedScrollConnection = remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(
+                    available: Offset, source: NestedScrollSource
+                ): Offset {
+                    val delta = available.y
+                    val newOffset = toolbarOffsetHeightPx.floatValue + delta
+                    toolbarOffsetHeightPx.floatValue = newOffset.coerceIn(-toolbarHeightPx, 0f)
+                    return Offset.Zero
+                }
+            }
+        }
+
         val scope = rememberCoroutineScope()
         var refreshing by remember {
             mutableStateOf(false)
@@ -90,6 +118,7 @@ fun MainScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .nestedScroll(nestedScrollConnection)
                 .pullRefresh(refreshState)
         ) {
             Column(
@@ -160,6 +189,12 @@ fun MainScreen(
                     .padding(top = (BigRadius - 8.dp))
             )
         }
+
+        NonFocusedTopBar(
+            mainNavController = mainNavController,
+            toolbarOffsetHeightPx = toolbarOffsetHeightPx.floatValue.roundToInt(),
+            name = mainState.name
+        )
 
     }
 

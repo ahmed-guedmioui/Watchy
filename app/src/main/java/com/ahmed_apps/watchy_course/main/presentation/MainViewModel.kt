@@ -10,6 +10,7 @@ import com.ahmed_apps.watchy_course.util.APIConstants.POPULAR
 import com.ahmed_apps.watchy_course.util.APIConstants.TRENDING_TIME
 import com.ahmed_apps.watchy_course.util.APIConstants.TV
 import com.ahmed_apps.watchy_course.util.Resource
+import com.ahmed_apps.watchy_course.util.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,7 +42,47 @@ class MainViewModel @Inject constructor(
             }
 
             is MainUiEvents.Refresh -> {
+                when (mainUiEvents.route) {
+                    Screen.Main.route -> {
+                        _mainState.update {
+                            it.copy(specialList = emptyList())
+                        }
 
+                        loadTrending(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                        loadTv(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                        loadMovies(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                    }
+
+                    Screen.Trending.route -> {
+                        loadTrending(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                    }
+
+                    Screen.Tv.route -> {
+                        loadTv(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                    }
+
+                    Screen.Movies.route -> {
+                        loadMovies(
+                            forceFetchFromRemote = true,
+                            isRefresh = true
+                        )
+                    }
+                }
             }
         }
     }
