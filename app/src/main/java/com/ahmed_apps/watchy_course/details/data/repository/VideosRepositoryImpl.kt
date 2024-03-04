@@ -3,9 +3,7 @@ package com.ahmed_apps.watchy_course.details.data.repository
 import android.app.Application
 import com.ahmed_apps.watchy_course.R
 import com.ahmed_apps.watchy_course.details.data.remote.api.DetailsApi
-import com.ahmed_apps.watchy_course.details.data.remote.dto.DetailsDto
-import com.ahmed_apps.watchy_course.details.domain.repository.DetailsRepository
-import com.ahmed_apps.watchy_course.main.domain.model.Media
+import com.ahmed_apps.watchy_course.details.domain.repository.VideosRepository
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
 import com.ahmed_apps.watchy_course.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -17,46 +15,55 @@ import javax.inject.Inject
 /**
  * @author Ahmed Guedmioui
  */
-class DetailsRepositoryImpl @Inject constructor(
+class VideosRepositoryImpl @Inject constructor(
     private val detailsApi: DetailsApi,
     private val mainRepository: MainRepository,
     private val application: Application
-) : DetailsRepository {
-
-    override suspend fun getDetails(
+) : VideosRepository {
+    override suspend fun getVideos(
         id: Int,
         isRefreshing: Boolean
-    ): Flow<Resource<Media>> {
+    ): Flow<Resource<List<String>>> {
         return flow {
+
             emit(Resource.Loading(true))
 
             val media = mainRepository.getMediaById(id)
 
-            val doDetailsExist =
-                media.runTime != 0 || media.tagLine.isNotEmpty()
+            val doVideosExist = media.videosIds.isNotEmpty()
 
-            if (doDetailsExist && !isRefreshing) {
-                emit(Resource.Success(media))
+            if (doVideosExist && !isRefreshing) {
+                emit(Resource.Success(media.videosIds))
                 emit(Resource.Loading(false))
                 return@flow
             }
 
-            val remoteDetailsDto = getRemoteDetails(
+            val remoteVideos = getVideoFromRemote(
                 type = media.mediaType,
                 id = id
             )
 
-            remoteDetailsDto?.let { detailsDto ->
-                val mediaWithDetails = media.copy(
-                    runTime = detailsDto.runTime ?: 0,
-                    tagLine = detailsDto.tagLine ?: ""
-                )
+            remoteVideos?.let { videosIds ->
+                if (videosIds.isNotEmpty()) {
+                    mainRepository.upsertMediaItem(
+                        media.copy(videosIds = videosIds)
+                    )
+                    emit(
+                        Resource.Success(
+                            mainRepository.getMediaById(id).videosIds
+                        )
+                    )
+                } else {
+                    emit(
+                        Resource.Error(
+                            application.getString(R.string.couldn_t_load_data)
+                        )
+                    )
+                }
 
-                mainRepository.upsertMediaItem(mediaWithDetails)
-
-                emit(Resource.Success(mainRepository.getMediaById(id)))
                 emit(Resource.Loading(false))
                 return@flow
+
             }
 
             emit(
@@ -65,16 +72,16 @@ class DetailsRepositoryImpl @Inject constructor(
                 )
             )
             emit(Resource.Loading(false))
+            return@flow
         }
     }
 
-    private suspend fun getRemoteDetails(
+    private suspend fun getVideoFromRemote(
         type: String,
         id: Int
-    ): DetailsDto? {
-
-        val remoteDetails = try {
-            detailsApi.getDetails(
+    ): List<String>? {
+        val remoteVideos = try {
+            detailsApi.getVideos(
                 type, id
             )
         } catch (e: IOException) {
@@ -88,9 +95,12 @@ class DetailsRepositoryImpl @Inject constructor(
             null
         }
 
-        return remoteDetails
-    }
+        val videos = remoteVideos?.results?.filter {
+            it.site == "YouTube" && it.key?.isNotEmpty() == true
+        }
 
+        return videos?.map { it.key!! }
+    }
 }
 
 
