@@ -17,6 +17,8 @@ interface MainRepository {
         category: String
     ): List<Media>
 
+    suspend fun getMediaById(id: Int): Media
+
     suspend fun getTrending(
         forceFetchFromRemote: Boolean,
         isRefresh: Boolean,

@@ -42,6 +42,10 @@ class MainRepositoryImpl @Inject constructor(
         return mediaDao.getMediaListByCategory(category).map { it.toMedia() }
     }
 
+    override suspend fun getMediaById(id: Int): Media {
+        return mediaDao.getMediaItemById(id).toMedia()
+    }
+
     override suspend fun getTrending(
         forceFetchFromRemote: Boolean,
         isRefresh: Boolean,
