@@ -19,6 +19,10 @@ interface MainRepository {
 
     suspend fun getMediaById(id: Int): Media
 
+    suspend fun getMediaListByIds(
+        ids: List<Int>
+    ): List<Media>
+
     suspend fun getTrending(
         forceFetchFromRemote: Boolean,
         isRefresh: Boolean,

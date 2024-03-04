@@ -41,6 +41,10 @@ interface MediaDao {
         mediaId: Int
     ): Int
 
+    @Query("SELECT * FROM MediaEntity WHERE mediaId IN (:ids)")
+    suspend fun getMediaListByIds(
+       ids: List<Int>
+    ): List<MediaEntity>
 
 
     @Query("DELETE FROM MediaEntity")

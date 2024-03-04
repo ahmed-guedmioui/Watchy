@@ -24,7 +24,13 @@ data class MediaEntity(
     val title: String,
     val voteAverage: Double,
     val voteCount: Int,
-    var category: String
+    var category: String,
+
+    val runTime: Int,
+    val tagLine: String,
+
+    val videosIds: String,
+    val similarMediaIds: String
 )
 
 

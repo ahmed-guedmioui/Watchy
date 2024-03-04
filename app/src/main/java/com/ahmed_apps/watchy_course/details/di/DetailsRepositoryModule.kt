@@ -1,8 +1,10 @@
 package com.ahmed_apps.watchy_course.details.di
 
 import com.ahmed_apps.watchy_course.details.data.repository.DetailsRepositoryImpl
+import com.ahmed_apps.watchy_course.details.data.repository.SimilarRepositoryImpl
 import com.ahmed_apps.watchy_course.details.data.repository.VideosRepositoryImpl
 import com.ahmed_apps.watchy_course.details.domain.repository.DetailsRepository
+import com.ahmed_apps.watchy_course.details.domain.repository.SimilarRepository
 import com.ahmed_apps.watchy_course.details.domain.repository.VideosRepository
 import dagger.Binds
 import dagger.Module
@@ -26,6 +28,12 @@ abstract class DetailsRepositoryModule {
     abstract fun bindVideosRepository(
         videosRepositoryImpl: VideosRepositoryImpl
     ): VideosRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSimilarRepository(
+       similarRepositoryImpl: SimilarRepositoryImpl
+    ): SimilarRepository
 
 }
 
