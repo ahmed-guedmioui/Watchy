@@ -1,6 +1,5 @@
 package com.ahmed_apps.watchy_course.ui.ui_components
 
-import android.widget.RatingBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
