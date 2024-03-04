@@ -46,6 +46,7 @@ import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.main.domain.usecase.GenreIdsToString
 import com.ahmed_apps.watchy_course.ui.theme.Radius
 import com.ahmed_apps.watchy_course.ui.theme.RadiusContainer
+import com.ahmed_apps.watchy_course.util.Screen
 
 /**
  * @author Ahmed Guedmioui
@@ -86,7 +87,9 @@ fun MediaItemImageAndTitle(
                 )
             )
             .clickable {
-//                mainNavController.navigate()
+                mainNavController.navigate(
+                    "${Screen.CoreDetails.route}?mediaId=${media.mediaId}"
+                )
             }
     ) {
 

@@ -9,4 +9,11 @@
     <string name="special">Special ✨</string>
     <string name="search_a_movies_or_tv_series">Search a movies or tv series</string>
     <string name="favorites_and_bookmarks">Favorites And Bookmarks</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="watch_trailer">Watch Trailer</string>
+    <string name="watch_trailer_of">Watch trailer of %1$s</string>
+    <string name="poster">%1$s poster</string>
+    <string name="_18">+18</string>
+    <string name="_12">+12</string>
+    <string name="overview">Overview</string>
 </resources>

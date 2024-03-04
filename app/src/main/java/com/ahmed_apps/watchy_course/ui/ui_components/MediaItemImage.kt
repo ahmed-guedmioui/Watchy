@@ -27,6 +27,7 @@ import coil.size.Size
 import com.ahmed_apps.watchy_course.main.data.remote.api.MediaApi
 import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.ui.theme.Radius
+import com.ahmed_apps.watchy_course.util.Screen
 
 /**
  * @author Ahmed Guedmioui
@@ -57,7 +58,9 @@ fun MediaItemImage(
             .clip(RoundedCornerShape(Radius))
             .background(MaterialTheme.colorScheme.inverseOnSurface)
             .clickable {
-//                mainNavController.navigate()
+                mainNavController.navigate(
+                    "${Screen.CoreDetails.route}?mediaId=${media.mediaId}"
+                )
             }
     ) {
         when (imageState) {

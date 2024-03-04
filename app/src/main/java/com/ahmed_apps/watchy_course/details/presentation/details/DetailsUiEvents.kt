@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.details.presentation
+package com.ahmed_apps.watchy_course.details.presentation.details
 
 /**
  * @author Ahmed Guedmioui

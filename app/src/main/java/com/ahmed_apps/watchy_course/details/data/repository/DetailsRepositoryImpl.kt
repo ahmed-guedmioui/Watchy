@@ -7,10 +7,12 @@ import com.ahmed_apps.watchy_course.details.data.remote.dto.DetailsDto
 import com.ahmed_apps.watchy_course.details.domain.repository.DetailsRepository
 import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
+import com.ahmed_apps.watchy_course.util.APIConstants.GET_TAG
 import com.ahmed_apps.watchy_course.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -36,6 +38,7 @@ class DetailsRepositoryImpl @Inject constructor(
                 media.runTime != 0 || media.tagLine.isNotEmpty()
 
             if (doDetailsExist && !isRefreshing) {
+                Timber.tag(GET_TAG).d("doDetailsExist: ${media.runTime}, ${media.tagLine}")
                 emit(Resource.Success(media))
                 emit(Resource.Loading(false))
                 return@flow
@@ -47,9 +50,10 @@ class DetailsRepositoryImpl @Inject constructor(
             )
 
             remoteDetailsDto?.let { detailsDto ->
+
                 val mediaWithDetails = media.copy(
-                    runTime = detailsDto.runTime ?: 0,
-                    tagLine = detailsDto.tagLine ?: ""
+                    runTime = detailsDto.runtime ?: 0,
+                    tagLine = detailsDto.tagline ?: ""
                 )
 
                 mainRepository.upsertMediaItem(mediaWithDetails)

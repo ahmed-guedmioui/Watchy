@@ -8,4 +8,33 @@ sealed class Screen(val route: String) {
     object Trending: Screen("trending")
     object Tv: Screen("tv")
     object Movies: Screen("movies")
+
+
+
+    object CoreDetails: Screen("core_details")
+    object Details: Screen("details")
+    object WatchVideo: Screen("watch_video")
+    object Similar: Screen("similar")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

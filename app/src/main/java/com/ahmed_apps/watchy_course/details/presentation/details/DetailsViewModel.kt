@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.details.presentation
+package com.ahmed_apps.watchy_course.details.presentation.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

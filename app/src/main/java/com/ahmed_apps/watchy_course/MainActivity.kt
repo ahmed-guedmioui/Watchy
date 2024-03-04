@@ -1,22 +1,22 @@
 package com.ahmed_apps.watchy_course
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.ahmed_apps.watchy_course.details.presentation.CoreDetailsScreen
 import com.ahmed_apps.watchy_course.main.presentation.MainScreen
 import com.ahmed_apps.watchy_course.main.presentation.MainViewModel
 import com.ahmed_apps.watchy_course.main.presentation.main_media_list.MainMediaListScreen
@@ -81,6 +81,26 @@ class MainActivity : ComponentActivity() {
                                 onEvent = mainViewModel::event
                             )
                         }
+
+                        composable(
+                            route = "${Screen.CoreDetails.route}?mediaId={mediaId}",
+                            arguments = listOf(
+                                navArgument("mediaId") {
+                                    type = NavType.IntType
+                                }
+                            )
+                        ) {
+
+                            val mediaId = it.arguments?.getInt(
+                                "mediaId"
+                            ) ?: 0
+
+                            CoreDetailsScreen(
+                                mediaId = mediaId,
+                                mainNavController = mainNavController
+                            )
+                        }
+
                     }
 
                 }

@@ -8,13 +8,15 @@ import com.ahmed_apps.watchy_course.details.domain.repository.SimilarRepository
 import com.ahmed_apps.watchy_course.details.domain.repository.VideosRepository
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
  * @author Ahmed Guedmioui
  */
 @Module
-@Singleton
+@InstallIn(SingletonComponent::class)
 abstract class DetailsRepositoryModule {
 
     @Binds
