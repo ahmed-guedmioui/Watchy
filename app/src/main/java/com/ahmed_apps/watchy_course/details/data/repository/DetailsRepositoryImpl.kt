@@ -38,7 +38,6 @@ class DetailsRepositoryImpl @Inject constructor(
                 media.runTime != 0 || media.tagLine.isNotEmpty()
 
             if (doDetailsExist && !isRefreshing) {
-                Timber.tag(GET_TAG).d("doDetailsExist: ${media.runTime}, ${media.tagLine}")
                 emit(Resource.Success(media))
                 emit(Resource.Loading(false))
                 return@flow

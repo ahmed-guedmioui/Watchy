@@ -16,4 +16,7 @@
     <string name="_18">+18</string>
     <string name="_12">+12</string>
     <string name="overview">Overview</string>
+    <string name="similar">Similar ✨</string>
+    <string name="like">Like</string>
+    <string name="bookmark">Bookmark</string>
 </resources>

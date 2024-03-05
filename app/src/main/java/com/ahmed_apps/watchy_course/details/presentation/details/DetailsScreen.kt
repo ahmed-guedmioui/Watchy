@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.MaterialTheme
@@ -31,9 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ahmed_apps.watchy_course.R
+import com.ahmed_apps.watchy_course.details.presentation.components.FavoritesSection
 import com.ahmed_apps.watchy_course.details.presentation.components.InfoSection
 import com.ahmed_apps.watchy_course.details.presentation.components.OverViewSection
 import com.ahmed_apps.watchy_course.details.presentation.components.PosterSection
+import com.ahmed_apps.watchy_course.details.presentation.components.SimilarSection
 import com.ahmed_apps.watchy_course.details.presentation.components.VideoSection
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -115,7 +118,30 @@ fun DetailsScreen(
                 OverViewSection(
                     media = detailsState.media
                 )
+
+                SimilarSection(
+                    mainNavController = mainNavController,
+                    detailsNavController = detailsNavController,
+                    media = detailsState.media,
+                    detailsState = detailsState
+                )
+
+                Spacer(modifier = Modifier.height(100.dp))
             }
+
+            FavoritesSection(
+                detailsState = detailsState,
+                onEvent = onEvent,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+
+            PullRefreshIndicator(
+                refreshing = refreshing,
+                state = refreshState,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+            )
+
         }
 
     }

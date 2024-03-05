@@ -46,11 +46,10 @@ class SimilarRepositoryImpl @Inject constructor(
             )
 
             remoteSimilarList?.let { similarMediaDtos ->
+                val similarIds = similarMediaDtos.map { it.id ?: 0 }
                 mainRepository.upsertMediaItem(
                     media.copy(
-                        similarMediaIds = similarMediaDtos.map {
-                            it.id ?: 0
-                        }
+                        similarMediaIds = similarIds
                     )
                 )
 
@@ -62,7 +61,7 @@ class SimilarRepositoryImpl @Inject constructor(
 
                 emit(
                     Resource.Success(
-                        mainRepository.getMediaListByIds(media.similarMediaIds)
+                        mainRepository.getMediaListByIds(similarIds)
                     )
                 )
                 emit(Resource.Loading(false))
