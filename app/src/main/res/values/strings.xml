@@ -19,4 +19,5 @@
     <string name="similar">Similar ✨</string>
     <string name="like">Like</string>
     <string name="bookmark">Bookmark</string>
+    <string name="no_video_is_available_at_the_moment">No video is available at the moment 😞</string>
 </resources>

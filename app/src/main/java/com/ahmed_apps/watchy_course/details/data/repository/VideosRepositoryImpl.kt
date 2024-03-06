@@ -5,10 +5,12 @@ import com.ahmed_apps.watchy_course.R
 import com.ahmed_apps.watchy_course.details.data.remote.api.DetailsApi
 import com.ahmed_apps.watchy_course.details.domain.repository.VideosRepository
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
+import com.ahmed_apps.watchy_course.util.APIConstants.GET_TAG
 import com.ahmed_apps.watchy_course.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 

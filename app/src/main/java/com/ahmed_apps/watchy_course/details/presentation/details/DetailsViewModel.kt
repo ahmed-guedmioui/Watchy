@@ -31,7 +31,7 @@ class DetailsViewModel @Inject constructor(
     private val _detailsState = MutableStateFlow(DetailsState())
     val detailsState = _detailsState.asStateFlow()
 
-    private val _navigateToWatchVideoChannel = Channel<String>()
+    private val _navigateToWatchVideoChannel = Channel<Boolean>()
     val navigateToWatchVideoChannel = _navigateToWatchVideoChannel.receiveAsFlow()
 
     fun onEvent(detailsUiEvent: DetailsUiEvents) {
@@ -43,11 +43,17 @@ class DetailsViewModel @Inject constructor(
             }
 
             DetailsUiEvents.NavigateToWatchVideo -> {
-                TODO()
+                viewModelScope.launch {
+                    if (detailsState.value.videoId.isNotEmpty()) {
+                        _navigateToWatchVideoChannel.send(true)
+                    } else {
+                        _navigateToWatchVideoChannel.send(false)
+                    }
+                }
             }
 
             DetailsUiEvents.Refresh -> {
-                TODO()
+                loadMediaItem(isRefresh = true)
             }
 
         }
@@ -67,14 +73,9 @@ class DetailsViewModel @Inject constructor(
 
             viewModelScope.launch {
                 loadDetails(isRefresh)
-            }
-            viewModelScope.launch {
                 loadVideos(isRefresh)
-            }
-            viewModelScope.launch {
                 loadSimilar()
             }
-
         }
     }
 

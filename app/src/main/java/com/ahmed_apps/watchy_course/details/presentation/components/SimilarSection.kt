@@ -60,7 +60,9 @@ fun SimilarSection(
                 Text(
                     modifier = Modifier
                         .clickable {
-//                            detailsNavController.navigate()
+                            detailsNavController.navigate(
+                                Screen.Similar.route
+                            )
                         },
                     text = stringResource(R.string.see_all),
                     fontSize = 14.sp,
@@ -72,7 +74,7 @@ fun SimilarSection(
                 items(mediaList.size) { index ->
 
                     var paddingEnd = 0.dp
-                    if (index == mediaList.size -1) {
+                    if (index == mediaList.size - 1) {
                         paddingEnd = 16.dp
                     }
 
