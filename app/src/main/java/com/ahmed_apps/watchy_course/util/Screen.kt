@@ -15,6 +15,7 @@ sealed class Screen(val route: String) {
     object Details: Screen("details")
     object WatchVideo: Screen("watch_video")
     object Similar: Screen("similar")
+    object Search: Screen("search")
 }
 
 

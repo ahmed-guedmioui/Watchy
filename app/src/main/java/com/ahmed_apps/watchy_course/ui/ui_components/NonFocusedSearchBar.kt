@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ahmed_apps.watchy_course.R
+import com.ahmed_apps.watchy_course.util.Screen
 
 /**
  * @author Ahmed Guedmioui
@@ -47,7 +48,9 @@ fun NonFocusedSearchBar(
                 .clip(RoundedCornerShape(50.dp))
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .clickable {
-//                    mainNavController.navigate()
+                    mainNavController.navigate(
+                        Screen.Search.route
+                    )
                 }
                 .padding(start = 16.dp, end = 7.dp),
             verticalAlignment = Alignment.CenterVertically

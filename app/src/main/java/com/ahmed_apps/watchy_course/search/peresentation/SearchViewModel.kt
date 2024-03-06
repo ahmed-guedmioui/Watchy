@@ -1,5 +1,6 @@
 package com.ahmed_apps.watchy_course.search.peresentation
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
@@ -33,6 +34,7 @@ class SearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+
     fun onEvent(searchUiEvent: SearchUiEvents) {
         when (searchUiEvent) {
             is SearchUiEvents.OnSearchItemClick -> {
@@ -52,11 +54,13 @@ class SearchViewModel @Inject constructor(
                     delay(500)
                     _searchState.update {
                         it.copy(
-                            searchQuery = searchUiEvent.newQuery,
+                            searchQuery = searchUiEvent.searchQuery,
                             searchList = emptyList()
                         )
                     }
-                    loadSearchList()
+                    if (searchState.value.searchQuery.isNotEmpty()) {
+                        loadSearchList()
+                    }
                 }
             }
 
