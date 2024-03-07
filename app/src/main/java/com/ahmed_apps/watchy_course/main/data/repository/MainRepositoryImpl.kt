@@ -2,6 +2,7 @@ package com.ahmed_apps.watchy_course.main.data.repository
 
 import android.app.Application
 import com.ahmed_apps.watchy_course.R
+import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.data.local.MediaDatabase
 import com.ahmed_apps.watchy_course.main.data.local.MediaEntity
 import com.ahmed_apps.watchy_course.main.data.mappers.toMedia
@@ -25,7 +26,8 @@ import javax.inject.Inject
 class MainRepositoryImpl @Inject constructor(
     private val application: Application,
     private val mediaApi: MediaApi,
-    mediaDatabase: MediaDatabase
+    mediaDatabase: MediaDatabase,
+    private val favoritesRepository: FavoritesRepository
 ) : MainRepository {
 
     private val mediaDao = mediaDatabase.mediaDao
@@ -96,11 +98,17 @@ class MainRepositoryImpl @Inject constructor(
 
             remoteMediaList?.let { mediaDtos ->
                 val entities = mediaDtos.map { mediaDto ->
+
+                    val favoriteMedia =
+                        favoritesRepository.getMediaItemById(
+                            mediaDto.id ?: 0
+                        )
+
                     mediaDto.toMediaEntity(
                         type = mediaDto.media_type ?: MOVIE,
                         category = TRENDING,
-                        isLiked = false,
-                        isBookmarked = false,
+                        isLiked = favoriteMedia?.isLiked ?: false,
+                        isBookmarked = favoriteMedia?.isBookmarked ?: false,
                     )
                 }
 

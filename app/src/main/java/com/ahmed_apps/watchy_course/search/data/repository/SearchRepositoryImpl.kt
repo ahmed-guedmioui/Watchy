@@ -2,6 +2,7 @@ package com.ahmed_apps.watchy_course.search.data.repository
 
 import android.app.Application
 import com.ahmed_apps.watchy_course.R
+import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.data.mappers.toMedia
 import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.search.data.remote.api.SearchApi
@@ -19,7 +20,8 @@ import javax.inject.Inject
  */
 class SearchRepositoryImpl @Inject constructor(
     private val searchApi: SearchApi,
-    private val application: Application
+    private val application: Application,
+    private val favoritesRepository: FavoritesRepository
 ) : SearchRepository {
     override suspend fun getSearchList(
         query: String, page: Int
@@ -56,11 +58,17 @@ class SearchRepositoryImpl @Inject constructor(
             }
 
             remoteSearchList?.let { mediaDtos ->
-                val mediaList = mediaDtos.map {
-                    it.toMedia(
+                val mediaList = mediaDtos.map { mediaDto ->
+
+                    val favoriteMedia =
+                        favoritesRepository.getMediaItemById(
+                            mediaDto.id ?: 0
+                        )
+
+                    mediaDto.toMedia(
                         APIConstants.POPULAR,
-                        isLiked = false,
-                        isBookmarked = false,
+                        isLiked = favoriteMedia?.isLiked ?: false,
+                        isBookmarked = favoriteMedia?.isBookmarked ?: false,
                     )
                 }
 

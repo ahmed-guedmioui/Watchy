@@ -4,6 +4,7 @@ import android.app.Application
 import com.ahmed_apps.watchy_course.R
 import com.ahmed_apps.watchy_course.details.data.remote.api.DetailsApi
 import com.ahmed_apps.watchy_course.details.domain.repository.SimilarRepository
+import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.data.mappers.toMedia
 import com.ahmed_apps.watchy_course.main.data.remote.dto.MediaDto
 import com.ahmed_apps.watchy_course.main.domain.model.Media
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class SimilarRepositoryImpl @Inject constructor(
     private val detailsApi: DetailsApi,
     private val mainRepository: MainRepository,
-    private val application: Application
+    private val application: Application,
+    private val favoritesRepository: FavoritesRepository
 ) : SimilarRepository {
     override suspend fun getSimilarMedia(
         id: Int
@@ -54,10 +56,16 @@ class SimilarRepositoryImpl @Inject constructor(
                 )
 
                 val similarMedia = similarMediaDtos.map { mediaDto ->
+
+                    val favoriteMedia =
+                        favoritesRepository.getMediaItemById(
+                            mediaDto.id ?: 0
+                        )
+
                     mediaDto.toMedia(
                         media.category,
-                        isLiked = false,
-                        isBookmarked = false,
+                        isLiked = favoriteMedia?.isLiked ?: false,
+                        isBookmarked = favoriteMedia?.isBookmarked ?: false,
                     )
                 }
 
