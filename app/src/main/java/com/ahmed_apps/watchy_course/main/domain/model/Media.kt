@@ -6,6 +6,9 @@ package com.ahmed_apps.watchy_course.main.domain.model
 data class Media(
     val mediaId: Int,
 
+    val isLiked: Boolean,
+    val isBookmarked: Boolean,
+
     val adult: Boolean,
     val backdropPath: String,
     val genreIds: List<String>,

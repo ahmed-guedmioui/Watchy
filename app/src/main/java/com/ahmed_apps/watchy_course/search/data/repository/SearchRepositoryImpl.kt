@@ -57,7 +57,11 @@ class SearchRepositoryImpl @Inject constructor(
 
             remoteSearchList?.let { mediaDtos ->
                 val mediaList = mediaDtos.map {
-                    it.toMedia(APIConstants.POPULAR)
+                    it.toMedia(
+                        APIConstants.POPULAR,
+                        isLiked = false,
+                        isBookmarked = false,
+                    )
                 }
 
                 emit(Resource.Success(mediaList))

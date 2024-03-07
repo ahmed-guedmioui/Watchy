@@ -98,7 +98,9 @@ class MainRepositoryImpl @Inject constructor(
                 val entities = mediaDtos.map { mediaDto ->
                     mediaDto.toMediaEntity(
                         type = mediaDto.media_type ?: MOVIE,
-                        category = TRENDING
+                        category = TRENDING,
+                        isLiked = false,
+                        isBookmarked = false,
                     )
                 }
 
@@ -166,7 +168,11 @@ class MainRepositoryImpl @Inject constructor(
 
             remoteMediaList?.let { mediaDtos ->
                 val entities = mediaDtos.map { mediaDto ->
-                    mediaDto.toMediaEntity(type, POPULAR)
+                    mediaDto.toMediaEntity(
+                        type, POPULAR,
+                        isLiked = false,
+                        isBookmarked = false,
+                    )
                 }
 
                 if (isRefresh) {

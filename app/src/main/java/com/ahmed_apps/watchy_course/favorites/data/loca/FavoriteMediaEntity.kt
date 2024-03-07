@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.main.data.local
+package com.ahmed_apps.watchy_course.favorites.data.loca
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
  * @author Ahmed Guedmioui
  */
 @Entity
-data class MediaEntity(
+data class FavoriteMediaEntity(
     @PrimaryKey val mediaId: Int,
 
     val isLiked: Boolean,
@@ -35,12 +35,3 @@ data class MediaEntity(
     val videosIds: String,
     val similarMediaIds: String
 )
-
-
-
-
-
-
-
-
-

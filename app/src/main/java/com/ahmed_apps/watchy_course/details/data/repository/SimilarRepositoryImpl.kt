@@ -54,7 +54,11 @@ class SimilarRepositoryImpl @Inject constructor(
                 )
 
                 val similarMedia = similarMediaDtos.map { mediaDto ->
-                    mediaDto.toMedia(media.category)
+                    mediaDto.toMedia(
+                        media.category,
+                        isLiked = false,
+                        isBookmarked = false,
+                    )
                 }
 
                 mainRepository.upsertMediaList(similarMedia)

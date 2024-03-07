@@ -13,6 +13,9 @@ fun Media.toMediaEntity(): MediaEntity {
     return MediaEntity(
         mediaId = mediaId,
 
+        isLiked = isLiked,
+        isBookmarked = isBookmarked,
+
         backdropPath = backdropPath,
         originalLanguage = originalLanguage,
         overview = overview,
@@ -57,6 +60,9 @@ fun Media.toMediaEntity(): MediaEntity {
 fun MediaEntity.toMedia(): Media {
     return Media(
         mediaId = mediaId,
+
+        isLiked = isLiked,
+        isBookmarked = isBookmarked,
 
         backdropPath = backdropPath,
         originalLanguage = originalLanguage,
@@ -109,10 +115,15 @@ fun MediaEntity.toMedia(): Media {
 
 fun MediaDto.toMediaEntity(
     type: String,
-    category: String
+    category: String,
+    isLiked: Boolean,
+    isBookmarked: Boolean
 ): MediaEntity {
     return MediaEntity(
         mediaId = id ?: 0,
+
+        isLiked = isLiked,
+        isBookmarked = isBookmarked,
 
         backdropPath = backdrop_path ?: "",
         originalLanguage = original_language ?: "",
@@ -151,10 +162,16 @@ fun MediaDto.toMediaEntity(
 
 
 fun MediaDto.toMedia(
-    category: String
+    category: String,
+    isLiked: Boolean,
+    isBookmarked: Boolean
 ) : Media {
     return Media(
         mediaId = id ?: 0,
+
+        isLiked = isLiked,
+        isBookmarked = isBookmarked,
+
 
         backdropPath = backdrop_path ?: "",
         originalLanguage = original_language ?: "",
