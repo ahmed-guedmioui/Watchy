@@ -11,6 +11,15 @@ sealed class DetailsUiEvents {
     object Refresh: DetailsUiEvents()
     object NavigateToWatchVideo: DetailsUiEvents()
 
+
+    data class ShowOrHideAlertDialog(
+        val alertDialogType: Int = 0
+    ): DetailsUiEvents()
+
+    object LikeOrDislike: DetailsUiEvents()
+    object BookmarkOrUnBookmark: DetailsUiEvents()
+
+
 }
 
 

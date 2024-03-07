@@ -18,7 +18,26 @@
     <string name="overview">Overview</string>
     <string name="similar">Similar ✨</string>
     <string name="like">Like</string>
+    <string name="disLike">Like</string>
     <string name="bookmark">Bookmark</string>
+    <string name="unbookmark">Unbookmark</string>
     <string name="no_video_is_available_at_the_moment">No video is available at the moment 😞</string>
     <string name="clear_search">Clear search</string>
+    <string name="remove_from_favorites">Remove From Favorites?</string>
+    <string name="remote_from_bookmarks">Remove from bookmarks?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+

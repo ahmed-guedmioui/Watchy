@@ -6,6 +6,7 @@ import com.ahmed_apps.watchy_course.details.domain.repository.DetailsRepository
 import com.ahmed_apps.watchy_course.details.domain.repository.SimilarRepository
 import com.ahmed_apps.watchy_course.details.domain.repository.VideosRepository
 import com.ahmed_apps.watchy_course.details.domain.usecase.MinutesToReadableTime
+import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
 import com.ahmed_apps.watchy_course.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +26,8 @@ class DetailsViewModel @Inject constructor(
     private val mainRepository: MainRepository,
     private val detailsRepository: DetailsRepository,
     private val videosRepository: VideosRepository,
-    private val similarRepository: SimilarRepository
+    private val similarRepository: SimilarRepository,
+    private val favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
     private val _detailsState = MutableStateFlow(DetailsState())
@@ -56,6 +58,35 @@ class DetailsViewModel @Inject constructor(
                 loadMediaItem(isRefresh = true)
             }
 
+            DetailsUiEvents.BookmarkOrUnBookmark -> {
+                bookmarkOrUnBookmark()
+            }
+
+            DetailsUiEvents.LikeOrDislike -> {
+                likeOrDislike()
+            }
+
+            is DetailsUiEvents.ShowOrHideAlertDialog -> {
+                val media = detailsState.value.media
+
+                if (detailsUiEvent.alertDialogType == 1 && media?.isLiked == false) {
+                    likeOrDislike()
+                    return
+                }
+
+                if (detailsUiEvent.alertDialogType == 2 && media?.isBookmarked == false) {
+                    bookmarkOrUnBookmark()
+                    return
+                }
+
+                _detailsState.update {
+                    it.copy(
+                        showAlertDialog = !it.showAlertDialog,
+                        alertDialogType = detailsUiEvent.alertDialogType
+                    )
+                }
+
+            }
         }
     }
 
@@ -157,6 +188,51 @@ class DetailsViewModel @Inject constructor(
                             )
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private fun likeOrDislike() {
+        _detailsState.update {
+            it.copy(
+                media = it.media?.copy(
+                    isLiked = !it.media.isLiked
+                ),
+                alertDialogType = 0,
+                showAlertDialog = false
+            )
+        }
+        updateOrDeleteMedia()
+    }
+
+    private fun bookmarkOrUnBookmark() {
+        _detailsState.update {
+            it.copy(
+                media = it.media?.copy(
+                    isBookmarked = !it.media.isBookmarked
+                ),
+                alertDialogType = 0,
+                showAlertDialog = false
+            )
+        }
+        updateOrDeleteMedia()
+    }
+
+    private fun updateOrDeleteMedia() {
+        viewModelScope.launch {
+            detailsState.value.media?.let { media ->
+                if (!media.isLiked && !media.isBookmarked) {
+                    favoritesRepository.deleteFavoritesMediaItem(
+                        media
+                    )
+                } else {
+                    mainRepository.upsertMediaItem(
+                        media
+                    )
+                    favoritesRepository.upsetFavoritesMediaItem(
+                        media
+                    )
                 }
             }
         }

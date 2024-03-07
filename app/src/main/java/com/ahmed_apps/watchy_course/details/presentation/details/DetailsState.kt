@@ -11,7 +11,10 @@ data class DetailsState(
     val readableTime: String = "",
 
     val videoList: List<String> = emptyList(),
-    val similarList: List<Media> = emptyList()
+    val similarList: List<Media> = emptyList(),
+
+    val showAlertDialog: Boolean = false,
+    val alertDialogType: Int = 0
 )
 
 
