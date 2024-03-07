@@ -27,6 +27,8 @@
     <string name="remote_from_bookmarks">Remove from bookmarks?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="favorites">Favorites ❤️</string>
+    <string name="bookmarks">Bookmarks 🍿️</string>
 </resources>
 
 

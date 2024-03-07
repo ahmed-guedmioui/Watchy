@@ -11,6 +11,7 @@ import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -87,12 +88,12 @@ fun FavoritesSection(
                 ) {
                     if (media.isBookmarked) {
                         Icon(
-                            imageVector = Icons.Rounded.Favorite,
+                            imageVector = Icons.Rounded.Bookmarks,
                             contentDescription = stringResource(R.string.bookmark)
                         )
                     } else {
                         Icon(
-                            imageVector = Icons.Outlined.FavoriteBorder,
+                            imageVector = Icons.Outlined.BookmarkBorder,
                             contentDescription = stringResource(R.string.unbookmark)
                         )
                     }

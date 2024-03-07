@@ -7,5 +7,5 @@ import com.ahmed_apps.watchy_course.main.domain.model.Media
  */
 data class FavoritesState (
     val likedList: List<Media> = emptyList(),
-    val bookmarkedList: List<Media> = emptyList()
+    val bookmarksList: List<Media> = emptyList()
 )

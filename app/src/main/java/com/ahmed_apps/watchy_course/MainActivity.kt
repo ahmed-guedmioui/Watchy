@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ahmed_apps.watchy_course.details.presentation.CoreDetailsScreen
+import com.ahmed_apps.watchy_course.favorites.presentation.CoreFavoritesScreen
 import com.ahmed_apps.watchy_course.main.presentation.MainScreen
 import com.ahmed_apps.watchy_course.main.presentation.MainViewModel
 import com.ahmed_apps.watchy_course.main.presentation.main_media_list.MainMediaListScreen
@@ -104,6 +105,10 @@ class MainActivity : ComponentActivity() {
 
                         composable(Screen.Search.route) {
                             SearchListScreen(mainNavController)
+                        }
+
+                        composable(Screen.CoreFavorites.route) {
+                            CoreFavoritesScreen(mainNavController)
                         }
 
                     }

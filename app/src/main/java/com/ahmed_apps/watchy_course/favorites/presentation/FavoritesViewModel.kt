@@ -34,7 +34,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     fun onEvent(favoritesUiEvent: FavoritesUiEvents) {
-        when(favoritesUiEvent) {
+        when (favoritesUiEvent) {
             FavoritesUiEvents.Refresh -> {
                 load()
             }
@@ -42,7 +42,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun load() {
-       loadLikedList()
+        loadLikedList()
         loadBookmarksList()
     }
 
@@ -60,7 +60,7 @@ class FavoritesViewModel @Inject constructor(
         viewModelScope.launch {
             _favoritesState.update {
                 it.copy(
-                    likedList = favoritesRepository.getLikedMediaList()
+                    bookmarksList = favoritesRepository.getBookmarkedMediaList()
                 )
             }
         }

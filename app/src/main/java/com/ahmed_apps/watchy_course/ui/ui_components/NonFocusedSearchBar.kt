@@ -99,7 +99,9 @@ fun NonFocusedSearchBar(
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .clickable {
-//                            mainNavController.navigate()
+                    mainNavController.navigate(
+                        Screen.CoreFavorites.route
+                    )
                 }
         ) {
 

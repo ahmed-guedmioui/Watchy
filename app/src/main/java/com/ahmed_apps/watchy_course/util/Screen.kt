@@ -16,6 +16,12 @@ sealed class Screen(val route: String) {
     object WatchVideo: Screen("watch_video")
     object Similar: Screen("similar")
     object Search: Screen("search")
+
+
+    object CoreFavorites: Screen("core_favorites")
+    object Favorites: Screen("favorites")
+    object LikedList: Screen("liked_list")
+    object Bookmarked: Screen("bookmarked")
 }
 
 
