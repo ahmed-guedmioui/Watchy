@@ -66,7 +66,9 @@ fun MainScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
-//                mainNavController.navigate()
+                mainNavController.navigate(
+                    Screen.CoreCategories.route
+                )
             }) {
                 Icon(
                     imageVector = Icons.Rounded.Category,

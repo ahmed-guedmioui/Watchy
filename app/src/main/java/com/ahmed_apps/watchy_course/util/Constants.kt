@@ -2,6 +2,14 @@ package com.ahmed_apps.watchy_course.util
 
 import com.ahmed_apps.watchy_course.main.domain.model.Genre
 
+object Constants {
+    const val actionAndAdventureList = "Action And Adventure"
+    const val dramaList = "Drama"
+    const val comedyList = "Comedy"
+    const val sciFiAndFantasyList = "Sci-Fi And Fantasy"
+    const val animationList = "Animation"
+}
+
 object APIConstants {
 
     // Queries for API calls

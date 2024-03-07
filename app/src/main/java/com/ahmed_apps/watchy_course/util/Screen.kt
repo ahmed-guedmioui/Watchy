@@ -22,6 +22,11 @@ sealed class Screen(val route: String) {
     object Favorites: Screen("favorites")
     object LikedList: Screen("liked_list")
     object Bookmarked: Screen("bookmarked")
+
+    object CoreCategories: Screen("core_categories")
+    object Categories: Screen("categories")
+    object CategoriesList: Screen("categories_list")
+
 }
 
 
