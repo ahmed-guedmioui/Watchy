@@ -25,6 +25,7 @@ interface FavoritesRepository {
     suspend fun getLikedMediaList(): List<Media>
     suspend fun getBookmarkedMediaList(): List<Media>
 
+    suspend fun cleareMainDb()
 }
 
 

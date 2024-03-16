@@ -68,6 +68,10 @@ class FavoritesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
+    override suspend fun cleareMainDb() {
+        favoriteMediaDao.deleteAllFavoriteMediaItems()
+    }
+
 }
 
 

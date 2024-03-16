@@ -39,6 +39,8 @@ interface MainRepository {
         page: Int
     ): Flow<Resource<List<Media>>>
 
+    suspend fun cleareMainDb()
+
 }
 
 

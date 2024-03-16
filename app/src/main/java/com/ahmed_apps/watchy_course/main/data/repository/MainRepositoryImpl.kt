@@ -199,6 +199,10 @@ class MainRepositoryImpl @Inject constructor(
             emit(Resource.Loading(false))
         }
     }
+
+    override suspend fun cleareMainDb() {
+        mediaDao.deleteAllMediaItem()
+    }
 }
 
 

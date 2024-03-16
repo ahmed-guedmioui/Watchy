@@ -82,7 +82,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation ("androidx.compose.material:material:1.6.3")
+    implementation("androidx.compose.material:material:1.6.3")
 
     // Extended Icons
     implementation("androidx.compose.material:material-icons-extended:1.6.3")
@@ -128,7 +128,7 @@ dependencies {
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
 
     // Encrypted Shared Preference
-    implementation ("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
 }
 
