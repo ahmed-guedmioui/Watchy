@@ -1,4 +1,4 @@
-package com.ahmed_apps.watchy_course.auth.repository
+package com.ahmed_apps.watchy_course.auth.data.repository
 
 import android.content.SharedPreferences
 import com.ahmed_apps.watchy_course.auth.data.remote.AuthApi

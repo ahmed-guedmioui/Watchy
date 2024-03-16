@@ -5,6 +5,10 @@ import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.ahmed_apps.watchy_course.auth.data.remote.AuthApi
+import com.ahmed_apps.watchy_course.auth.domain.usecase.FormValidatorUseCase
+import com.ahmed_apps.watchy_course.auth.domain.usecase.ValidateEmailUseCase
+import com.ahmed_apps.watchy_course.auth.domain.usecase.ValidateNameUseCase
+import com.ahmed_apps.watchy_course.auth.domain.usecase.ValidatePasswordUseCase
 import com.ahmed_apps.watchy_course.util.BackendConstants
 import dagger.Module
 import dagger.Provides
@@ -50,7 +54,16 @@ class AuthModule {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+    }
 
+    @Provides
+    @Singleton
+    fun provideFromValidatorUseCase(): FormValidatorUseCase {
+        return FormValidatorUseCase(
+            ValidateEmailUseCase(),
+            ValidatePasswordUseCase(),
+            ValidateNameUseCase()
+        )
     }
 
 }
