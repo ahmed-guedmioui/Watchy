@@ -59,7 +59,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun LoginScreen(
     onAuthorized: () -> Unit,
-    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit,
 ) {
 
     val loginViewModel = hiltViewModel<LoginViewModel>()
@@ -249,7 +249,7 @@ fun LoginScreen(
                 text = stringResource(R.string.register),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable { onLoginClick() }
+                modifier = Modifier.clickable { onRegisterClick() }
             )
 
         }

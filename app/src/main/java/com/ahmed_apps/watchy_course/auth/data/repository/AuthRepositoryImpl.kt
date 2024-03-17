@@ -8,6 +8,7 @@ import com.ahmed_apps.watchy_course.auth.util.AuthResult
 import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
 import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -26,7 +27,9 @@ class AuthRepositoryImpl @Inject constructor(
         return try {
             authApi.register(
                 AuthRequest(
-                    name, email, password
+                    name = name,
+                    email = email,
+                    password = password
                 )
             )
 
@@ -51,9 +54,11 @@ class AuthRepositoryImpl @Inject constructor(
         email: String, password: String
     ): AuthResult<Unit> {
         return try {
+
             val authRespond = authApi.login(
-                AuthRequest(
-                    email, password
+                authRequest = AuthRequest(
+                    email = email,
+                    password = password
                 )
             )
 
@@ -65,6 +70,7 @@ class AuthRepositoryImpl @Inject constructor(
 
         } catch (e: HttpException) {
             e.printStackTrace()
+            println(e.message)
             if (e.code() == 401) {
                 AuthResult.Unauthorized()
             } else {
@@ -72,6 +78,7 @@ class AuthRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            println(e.message)
             AuthResult.UnknownError()
         }
     }
@@ -82,7 +89,7 @@ class AuthRepositoryImpl @Inject constructor(
             val token = prefs.getString("token", null)
                 ?: return AuthResult.Unauthorized()
 
-            authApi.authenticate(token)
+            authApi.authenticate("Bearer $token")
 
             AuthResult.Authorized()
 

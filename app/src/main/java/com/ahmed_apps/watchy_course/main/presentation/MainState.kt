@@ -20,7 +20,7 @@ data class MainState(
     // 2 from trending + 2 from tv + 2 from movies
     val specialList: List<Media> = emptyList(),
 
-    val name: String = "Ahmed"
+    val name: String = ""
 
 )
 

@@ -2,7 +2,6 @@ package com.ahmed_apps.watchy_course.auth.presentation.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ahmed_apps.watchy_course.auth.di.AuthRepositoryModule
 import com.ahmed_apps.watchy_course.auth.domain.repository.AuthRepository
 import com.ahmed_apps.watchy_course.auth.domain.usecase.FormValidatorUseCase
 import com.ahmed_apps.watchy_course.auth.util.AuthResult
@@ -45,13 +44,13 @@ class RegisterViewModel @Inject constructor(
 
             is RegisterUiEvents.OnNameChanged -> {
                 _registerState.update {
-                    it.copy(email = registerUiEvent.newName)
+                    it.copy(name = registerUiEvent.newName)
                 }
             }
 
             is RegisterUiEvents.OnPasswordChanged -> {
                 _registerState.update {
-                    it.copy(email = registerUiEvent.newPassword)
+                    it.copy(password = registerUiEvent.newPassword)
                 }
             }
 
@@ -89,6 +88,10 @@ class RegisterViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
+            _registerState.update {
+                it.copy(isLoading = true)
+            }
+
             val result = authRepository.register(
                 registerState.value.name,
                 registerState.value.email,

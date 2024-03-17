@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
             is LoginUiEvents.OnPasswordChanged -> {
                 _loginState.update {
-                    it.copy(email = loginUiEvent.newPassword)
+                    it.copy(password = loginUiEvent.newPassword)
                 }
             }
 
@@ -73,11 +73,11 @@ class LoginViewModel @Inject constructor(
 
     private fun login() {
 
-        _loginState.update {
-            it.copy(isLoading = true)
-        }
-
         viewModelScope.launch {
+            _loginState.update {
+                it.copy(isLoading = true)
+            }
+
             val result = authRepository.login(
                 loginState.value.email,
                 loginState.value.password

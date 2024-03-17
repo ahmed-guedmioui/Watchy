@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed_apps.watchy_course.main.domain.model.Media
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
+import com.ahmed_apps.watchy_course.profile.domain.repository.ProfileRepository
 import com.ahmed_apps.watchy_course.util.APIConstants.ALL
 import com.ahmed_apps.watchy_course.util.APIConstants.MOVIE
 import com.ahmed_apps.watchy_course.util.APIConstants.POPULAR
@@ -23,19 +24,14 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository
+    private val mainRepository: MainRepository,
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
     private val _mainState = MutableStateFlow(MainState())
     val mainState = _mainState.asStateFlow()
 
-    init {
-        loadTrending()
-        loadTv()
-        loadMovies()
-    }
-
-    fun event(mainUiEvents: MainUiEvents) {
+    fun onEvent(mainUiEvents: MainUiEvents) {
         when (mainUiEvents) {
             is MainUiEvents.Paginate -> {
                 when(mainUiEvents.route) {
@@ -101,6 +97,21 @@ class MainViewModel @Inject constructor(
                         )
                     }
                 }
+            }
+
+            MainUiEvents.LoadAll -> {
+                loadTrending()
+                loadTv()
+                loadMovies()
+
+                viewModelScope.launch {
+                    _mainState.update {
+                        it.copy(
+                            name = profileRepository.getName()
+                        )
+                    }
+                }
+
             }
         }
     }

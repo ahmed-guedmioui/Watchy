@@ -78,7 +78,9 @@ fun NonFocusedSearchBar(
                         .alpha(0.8f)
                         .background(MaterialTheme.colorScheme.primary)
                         .clickable {
-//                            mainNavController.navigate()
+                            mainNavController.navigate(
+                                Screen.Profile.route
+                            )
                         }
                 ) {
                     Text(
