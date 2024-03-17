@@ -72,6 +72,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun login() {
+
+        _loginState.update {
+            it.copy(isLoading = true)
+        }
+
         viewModelScope.launch {
             val result = authRepository.login(
                 loginState.value.email,
@@ -80,6 +85,9 @@ class LoginViewModel @Inject constructor(
 
             _authResultChannel.send(result)
 
+            _loginState.update {
+                it.copy(isLoading = false)
+            }
         }
     }
 

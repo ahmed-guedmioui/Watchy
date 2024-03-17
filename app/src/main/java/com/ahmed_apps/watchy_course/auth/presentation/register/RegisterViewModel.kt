@@ -83,6 +83,11 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun register() {
+
+        _registerState.update {
+            it.copy(isLoading = true)
+        }
+
         viewModelScope.launch {
             val result = authRepository.register(
                 registerState.value.name,
@@ -92,6 +97,9 @@ class RegisterViewModel @Inject constructor(
 
             _authResultChannel.send(result)
 
+            _registerState.update {
+                it.copy(isLoading = false)
+            }
         }
     }
 

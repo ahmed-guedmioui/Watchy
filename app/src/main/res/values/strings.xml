@@ -30,6 +30,20 @@
     <string name="favorites">Favorites ❤️</string>
     <string name="bookmarks">Bookmarks 🍿️</string>
     <string name="action_and_adventure">Action And Adventure</string>
+    <string name="unknown_error_happened">Unknown error happened</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="app_icon">App icon</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_is_visible">Password is visible</string>
+    <string name="password_is_invisible">Password is invisible</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_to_your_account">login To Your Account</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 </resources>
 
 
