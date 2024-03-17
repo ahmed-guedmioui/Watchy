@@ -8,7 +8,6 @@ import com.ahmed_apps.watchy_course.auth.util.AuthResult
 import com.ahmed_apps.watchy_course.favorites.domain.repository.FavoritesRepository
 import com.ahmed_apps.watchy_course.main.domain.repository.MainRepository
 import retrofit2.HttpException
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -112,7 +111,7 @@ class AuthRepositoryImpl @Inject constructor(
         prefs.edit().putString("token", null).apply()
 
         mainRepository.cleareMainDb()
-        favoritesRepository.cleareMainDb()
+        favoritesRepository.clearMainDb()
 
         return AuthResult.SingedOut()
 

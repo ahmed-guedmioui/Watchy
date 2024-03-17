@@ -10,6 +10,9 @@ import androidx.room.PrimaryKey
 data class FavoriteMediaEntity(
     @PrimaryKey val mediaId: Int,
 
+    val isSynced: Boolean,
+    val isDeletedLocally: Boolean,
+
     val isLiked: Boolean,
     val isBookmarked: Boolean,
 

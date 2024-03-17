@@ -28,7 +28,7 @@ interface BackendMediaApi {
     suspend fun getMediaById(
         @Path("mediaId") mediaId: String,
         @Path("email") email: String,
-    ): List<BackendMediaDto>
+    ): BackendMediaDto
 
     @POST(BackendConstants.UPSERT_MEDIA_TO_USER)
     suspend fun upsertMediaToUser(
