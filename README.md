@@ -3,6 +3,7 @@
  ## Watchy Demo App
  https://drive.google.com/file/d/1p32DZI7m_NCa4BT7dLd5aqL930epQ-Wk/view?usp=sharing
 
+
  ## About the App
 
  Watchy is a dynamic Android app, crafted with cutting-edge technologies like Jetpack Compose and Kotlin, delivering an immersive experience for movie and TV series enthusiasts. Developed by Ahmed Guedmioui, Watchy prioritizes clean code principles, secure user experience, and seamless functionality.
