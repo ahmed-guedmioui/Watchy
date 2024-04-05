@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ahmed_apps.watchy_course"
+    namespace = "com.ahmed_apps.watchy"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ahmed_apps.watchy_course"
+        applicationId = "com.ahmed_apps.watchy"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

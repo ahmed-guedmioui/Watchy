@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Watchy-Course"
+rootProject.name = "Watchy"
 include(":app")
  
